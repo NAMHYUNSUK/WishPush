@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- 
+  Name : detail_product.html
+  Description : 상품 상세설명
+  Modification Information
+  1. 2016.02.12. 남현석 최초생성
+  2. 2016.02.12.   ""   프레임 완성
+  3. 2016.02.15.   ""   반응형 기능 추가
+  4. 2016.02.19.   ""   장바구니 DB연동 및 버튼 추가
+  5. 2016.02.21.   ""   반응형 완
+  
+  since
+  version 1.1
+  see
+  -->
+  <title>LotteMall</title>
+  <meta name ="author" Content="Web Application Project Team">
+  <meta name ="keywords" Content="Lotte, mall, shopping, 롯데, 쇼핑">
+  <meta name ="description" Content="GPS기반 쇼핑전용 애플리케이션입니다.">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="../style/css/bootstrap.min.css" type="text/css">
+
+  <!-- Plugin CSS -->
+  <link rel="stylesheet" href="../style/css/animate.min.css" type="text/css">
+  <link rel="stylesheet" href="../style/css/m.v2.min.css" type="text/css">
+
+  <!-- backward Operator -->
+  <!-- jQuery -->
+  <script src="../style/js/jquery.js"></script>
+  <!-- Bootstrap Core js -->
+  <script src="../style/js/bootstrap.min.js"></script>
+
+  <!-- Plugin js -->
+  <script src="../style/js/jquery.easing.min.js"></script>
+  <script src="../style/js/jquery.fittext.js"></script>
+  <script src="../style/js/wow.min.js"></script>
+  
+  <?php
+  	session_start();
+
+	$is_logged = $_SESSION['is_logged'];
+	$account_idx = $_SESSION['account_idx'];
+
+    $idx = $_GET["idx"];
+    $name = $_GET["name"];
+    $price = $_GET["price"];
+    $img_name = $_GET["img_name"];
+	$rate = $_GET["rate"];
+
+    echo "<script>idx='$idx'; name='$name'; price='$price'; img_name='$img_name';account_idx='$account_idx';rate='$rate';</script>";
+  ?>
+  
+</head>
+<body>
+  <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container-fluid">
+        <!-- Brand  -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="../index.html">Lotte Mall</a>
+        </div>
+
+        <!--('in': open, '': close, 'active': click effect)-->
+        <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-left">
+            <li>
+              <a href="../myPage/isLogin.php">마이정보</a>
+            </li>
+            <li>
+              <a href="#">프로모션/쿠폰</a>
+            </li>
+            <li>
+              <a href="#">오프라인매장</a>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li id="cart"><a href="../myPage/myCartisNotEmpty.html">장바구니</a></li>
+            <li ><a id="showId" href="../myPage/isLogin.php">          
+            <?php 
+			session_start();
+			
+			$is_logged = $_SESSION['is_logged'];
+			$usr_id = $_SESSION['usr_id'];
+	
+			if ($is_logged == 'YES')
+			{
+				echo $usr_id." 님 환영합니다."; 
+			}
+			
+ 			?></a></li>
+ 			<li><a id="logout" href="../php_db/logout.php">          
+            <?php 			
+
+			if ($is_logged == 'YES')
+			{
+				echo "로그아웃"; 
+			}
+		
+			mysql_close($connect);
+ 			?></a></li>
+ 			<li><a id="login" href="../myPage/login.html">          
+            <?php
+             
+			if ($is_logged != 'YES')
+			{
+				echo "로그인"; 
+			}
+ 			?></a></li>
+          </ul>
+        </div><!-- end of navbar -->
+      </div><!-- end of container -->
+    </div>
+
+    <!--  blank -->
+    <div id="blank" style="height:60px; width:100%"></div>
+
+    <!-- start main -->
+    <div id="product" style=""></div>
+
+	<!--  장바구니,구매하기 PC용 -->
+  <div id="pc-buy" style="height:80px; width:40%; margin-top:5%; margin-right:0; position:relative; float:right;">
+      <select id="bf_select_pc" name="respenses0"  style="width:100%; position:relative; float:right; height:30px; margin-top:5%;margin-bottom: 5%;"> 
+        <option id = "bf_blk" selected="selected">상품을 선택하세요</option> 
+      </select>
+      
+      <a id="cart_btn_pc" class="add-cart" style="width:45%; position:relative;font-size:16px; text-align:center;">장바구니 담기</a>
+      
+      <a id="orderButton" href="#" class="go-buy" style=" width:45%; position:relative; font-size:16px; text-align:center;">구매하기</a>
+      
+      <a href="../myPage/offLineInfo.html?idx=<?php echo $idx;?>" class="btn btn-default" style="margin-top:5%; width:95%; position:relative; font-size:12px; text-align:center;">가까운 오프라인매장 보기</a>
+
+  </div>
+  
+  	<!--  장바구니,구매하기 모바일용 -->
+  <div id="buy-button" style="" >  
+      <select id="bf_select_mob" name="respenses0" style="height:30px;width:70%; margin-bottom: 5%; margin-left: auto; margin-right: auto;"> 
+        <option id = "bf_blk" selected="selected">상품을 선택하세요</option> 
+      </select>
+      <a id="cart_btn_mob" class="add-cart" style="width:30%; font-size:14px">장바구니 담기</a>
+      
+      <a id="orderButton" href="#" class="go-buy" style="width:30%; font-size:14px">구매하기</a>
+  </div>
+  
+  <!--  blank -->
+    <div id="blank" style="height:60px; width:100%;"></div>
+
+  <ul id="mobile_tab" class="detail-tab" style="width:100%;">
+    <li><a href="#EXPLANATION" class="selected">상품설명</a></li>
+    <li><a href="#PRECONDITION">사용조건</a></li>
+    <li><a href="#QUESTION">상품이벤트</a></li>
+  </ul>
+  
+<div class="detail-description" id="EXPLANATION">
+    <!--판매자 정보-->
+  <div class="seller-info">
+    <p class="seller-info-title">판매자 정보</p>
+      <table>
+        <colgroup>
+          <col width="37%"/>
+          <col width="*"/>
+        </colgroup>
+        <tr>
+          <th>상호</th>
+          <td>(주)LOTTE</td>
+        </tr>
+      </table>
+      <p class="minor-notice">
+          미성년자가 체결한 계약은 법정대리인이 동의하지 않는 경우 본인 또는 법정대리인이 취소할 수 있습니다.
+      </p>
+  </div>
+    <!-- 배송상품 반품안내 배너 -->
+    <img src= "../img/exchange.jpg" width="100%" alt=""/>
+  </div>    
+            
+  <div class="detail-condition" id="PRECONDITION">
+    <h3 class="none">사용조건</h3>
+    <ul class="detail-condition-text">
+        <li style='color: rgb(34, 34, 34); font-family: 돋움, Dotum; font-size: 12.222222328186035px; padding: 0px; list-style: none; float: left; width: 310px; vertical-align: top; line-height: 18px;'>  <span style='color: rgb(51, 51, 51);'>      <span style='font-weight: 700;'>      <br class='Apple-interchange-newline'>[롯데몰안내]</span><br>           <span style='font-weight: 700;'>구매제한:</span>&nbsp;1인&nbsp;</span>                  <font color='#ff0000'>100개</font>                  <font color='#333333'>&nbsp;구매가능<br></font>                      <b>A/S 안내 :&nbsp;</b><br>&nbsp; &nbsp; -&nbsp;제조사의 A/S 기준에 따릅니다.<br>&nbsp; &nbsp; -&nbsp;1577-7011<br><br><br>                      <span style='color: rgb(51, 51, 51); font-weight: 700;'>[제품정보]</span>                      <br>                       <font style='color: rgb(51, 51, 51);'>             <span style='font-weight: 700;'>제조국:&nbsp;</span></font>&nbsp;              <span style='font-size: 12.2222px;'>하단 제품 상세 및 상품 필수 표기정보 참조</span><br>             <span style='color: rgb(51, 51, 51); font-weight: 700;'>제조자:&nbsp;</span>                                하단 제품 상세 및 상품 필수 표기정보 참조                                <br><font color='#ff0000'>                           <span style='font-weight: 700;'>제조연월 또는 사용기한:&nbsp;</span>                                하단 제품 상세 및 상품 필수 표기정보 참조</font><br>                           <span style='color: rgb(51, 51, 51); font-weight: 700;'>소비자상담 관련전화번호:</span>                                <font color='#333333'>&nbsp;1577-7011   </font><br><br></li>                           <li style='color: rgb(34, 34, 34); font-family: 돋움, Dotum;                                        font-size: 12.222222328186035px; padding: 0px; list-style: none; float: left; width: 310px;                                        vertical-align: top; line-height: 18px;'>                              <span style='color: rgb(51, 51, 51); font-weight: 700;'>[배송정보]</span><br>                              <span style='color: rgb(51, 51, 51); font-weight: 700;'>배송 예정일:&nbsp;</span>                              <font color='#333333'>구매순 순차 배송</font><br>                              <span style='color: rgb(51, 51, 51); font-weight: 700;'>배송사:&nbsp;</span>                              <font color='#ff0000'>대한통운</font><br>                              <span style='color: rgb(51, 51, 51); font-weight: 700;'>배송비용: &nbsp; 9,800원 이상 구매시 무료배송 (9,800원 미만시, 선불 2500원 ) </span><br>                              <span style='color: rgb(51, 51, 51); font-weight: 700;'>[교환, 반품 안내]</span>                                <br>                                <p style='color: rgb(51, 51, 51); margin-bottom: 0px; margin-left: 20px; padding: 0px;'>                                <span style='font-weight: 700;'>1.</span>&nbsp;단순변심에 의한 환불은 제품 수령 후 7일이내까지만 가능<br>　(왕복배송비 고객부담)&nbsp;<br>                                <span style='font-weight: 700;'>2.</span>&nbsp;제품 하자의 경우 물품수령 후 3개월이내<br>&nbsp;&nbsp;&nbsp;&nbsp;또는 그 사실을 안 날로부터 30일이내 반품 가능<br>                                </p>                                <p style='color: rgb(51, 51, 51); margin-bottom: 0px; margin-left: 20px; padding: 0px;'>                                <span style='font-weight: 700;'>3.</span>&nbsp;포장이 훼손되어 상품 가치가 현저히 상실된 경우&nbsp;<br>(예 : 가전제품, 식품, 화장품, 향수, 수입명품 포장 개봉 등)&nbsp;<br>                                <span style='font-weight: 700;'>4.</span>&nbsp;신선/냉동식품, 주문제작상품, 설치가 완료된 가구/가전 설치상품의 경우 상품특성상 단순변심에 의한 교환 및 반품불가<span style='font-weight: 700;'>＊교환·반품에 관한 정책은 페이지 하단 참조</span><br>                                </p>                                <a href='http://www.coupang.com/csFaq.pang' target='_blank' style='color: rgb(51, 51, 51); background-repeat: initial initial;'>&lt;클릭&gt; 롯데몰 사용 방법 안내(FAQ)</a>                           </li>
+      <ul class="pictogram">
+      </ul>
+      <li>
+          <a class="detail-require-info">상품 필수 표기정보 보기</a>
+      </li>
+    </ul>
+  </div>    
+                
+  <div id="QUESTION" class="detail-inquiry">
+      <div id="eventList"></div>
+  </div>    
+
+    <!--  blank -->
+    <div id="blank" style="height:100px; width:100%"></div>
+
+  <script>
+    var idx;
+    var name;
+    var price;
+    var img_name;
+    var rate;
+    var account_idx;
+
+    var rowNum;
+    var option = [];
+    var li = [];
+    var tzs = [];
+    var p_ev=[];
+    
+    var h4;
+    var h5;
+    var h3 = document.createElement("h3");
+    var pc_buy = document.getElementById("pc-buy");
+    var a = document.createElement("a");
+    var p;
+    var img;
+    $(document).ready(init);
+    
+    function init() {
+        h4 = document.createElement("h4");
+        h4.setAttribute('class','list-group-item-heading');
+        h4.innerHTML = price  ; //상품가격
+        
+        h5 = document.createElement("h5");
+        h5.setAttribute('class','list-group-item-heading');
+        h5.innerHTML = " ("+ rate+"% 할인)"; //상품가격
+
+        p = document.createElement("p"); // 이름 
+        p.setAttribute('class','list-group-item-text');
+        p.innerHTML = name;
+
+        img = document.createElement("img"); //이미지 
+        img.setAttribute( 'src', '../img/'+ img_name );
+        
+        h3.setAttribute('class','list-group-item-heading');
+        h3.innerHTML = Math.round(Math.round(price)*(100-Math.round(rate))/100 /100)*100  + ' 원';  ; //상품가격
+
+        //tab controll
+        $('.detail-tab a').click(function(e){
+            e.preventDefault();
+            $('.detail-tab a').removeClass('selected')
+            $('#EXPLANATION, #PRECONDITION, #QUESTION').hide();
+
+            $(this).addClass('selected');
+            $($(this).attr('href')).show();
+        });
+		//AJAX DB통신
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '../php_db/product_info.php');
+        xhr.onreadystatechange = function(){
+          if(xhr.readyState === 4 && xhr.status === 200){
+        	  //성공시
+            var _tzs = xhr.responseText;
+            tzs = JSON.parse(_tzs);
+            var _str = '';
+            rowNum = tzs.length;
+            var size = '';
+            var stock;
+            var stock_qty;
+            for(var i = 0; i< rowNum; i++){
+            	if(i==0) {	
+            		stock_qty = tzs[i].stock_qty;
+            		continue;
+            	}
+                li[i] = document.createElement("img");
+                li[i].setAttribute('id','li_'+i);
+                li[i].setAttribute('src', '../img/'+tzs[i].contents);
+                li[i].setAttribute('alt', 'market: '+tzs[i].market_name+'event_name:'+tzs[i].event_name);
+            }
+            for(var i = 0; i< 5; i++){
+            	// 싸이즈 / 수량 
+            	option[i] = document.createElement("option"); // 선택
+                option[i].setAttribute('id','bf_'+i);
+                option[i].setAttribute('value', i);
+                switch(i) {
+                case 0: size = 'SS'; stock = Math.round(stock_qty) +1;
+                	break;
+                case 1:	size = 'S'; stock = Math.round(stock_qty *1.2);
+                	break;
+                case 2: size = 'M'; stock = Math.round(stock_qty*1.1) ;
+                	break;
+                case 3: size = 'L'; stock = Math.round(stock_qty*1.4);
+                	break;
+                case 4: size = 'XL'; stock = Math.round(stock_qty*1.5);
+                	break;
+                default: size = 'XXL'; stock = Math.round(stock_qty*1.3);
+                	break;
+                }
+                option[i].innerHTML = size+" / 재고: " + stock;
+            }//end of for
+            reloadDisplay();
+          } //end of if
+        } //end of onreadystatechange
+        var data = new Object();
+        data.product_idx = idx;
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.send(JSON.stringify(data)); 
+
+        window.onresize = function() { 
+        reloadDisplay(); 
+      };
+      fn_setEvent();
+      
+    }
+    
+    // 리사이즈가 변화에 따라 한 번만 실행되도록 mode 값 활용
+    var mode = null; // 1이면 PC 상태, 0이면 MOBILE 상태
+    
+    function setResizeMode() {
+      if ($(window).width() >= 768) {
+        mode = 0;
+      }
+      else {
+        mode = 1;
+      }
+    }
+
+    function reloadDisplay() {
+      setResizeMode();
+
+      if ($(window).width() >= 768) { // PC
+        var old_mode = mode;
+        mode = 1;
+        
+        if(old_mode != mode) {
+            $('#buy-button').css('display', 'none');
+            a.setAttribute('style','display :none');
+            $('#EXPLANATION, #PRECONDITION, #QUESTION').css('margin', '10% 20% 20% 10%');
+            document.getElementById('product').setAttribute('style','margin-top:5%; margin-left:auto; margin-right: auto; width:80%;');
+            $('#pc-buy').css('display', 'block');
+            
+          	//이미지, 상품이름, 가격
+            document.getElementById('product').appendChild(img);
+            img.setAttribute( 'width', '50%' );
+            img.setAttribute( 'height', '50%' );
+            img.setAttribute( 'style', 'margin: 0px  10px 50px 10px; border: 0; padding: 0; position:relative; float:left;' );
+            
+            document.getElementById('product').appendChild(p);
+            document.getElementById('product').appendChild(h4);
+            document.getElementById('product').appendChild(h5);
+ 			document.getElementById('product').appendChild(h3);
+ 			
+ 			p.setAttribute( 'style', 'margin: 10px  20px 5px 0px; border: 0; padding: 0; position:relative; float:right; font-weight:700;' );
+ 			h4.setAttribute( 'style', 'width:30%; margin: 2% 0% 0% 0%; border: 0; padding: 0% 0% 0% 20%; position:relative;float:left; text-decoration: line-through;' );
+ 			h5.setAttribute( 'style', 'width:10%; margin: 2% 0% 0% 0%; border: 0; padding: 0% 0% 0% 0%; position:relative;float:left;' );
+ 			h3.setAttribute( 'style', 'width:45%; margin: 1% 0% 0% 0%; border: 0; padding: 0% 0% 0% 25%; float:left;color:#518ddd;' );
+
+ 	        
+ 			document.getElementById('product').appendChild(pc_buy);
+ 			
+ 			
+            //상품선택
+            for(var i = 0; i< 5; i++) 
+            	document.getElementById('bf_select_pc').appendChild(option[i]);
+            
+            var eventList = document.getElementById("eventList");
+            while (eventList.firstChild) {
+            	eventList.removeChild( eventList.firstChild );
+			}
+            for(var i=0; i<rowNum; i++) {
+            	//이벤트 그리기
+	            if(i==0)	{ p_ev[0] = document.createElement("p"); continue; }
+	            li[i].setAttribute('style', 'width:70%;');
+	            document.getElementById('eventList').appendChild(li[i]);
+	            document.getElementById('eventList').appendChild( document.createElement("br")  );
+	            
+	            p_ev[i] = document.createElement("p");
+	            p_ev[i].setAttribute('class','text-warning');
+	            p_ev[i].innerHTML = tzs[i].market_name +"<br/>"+tzs[i].event_name;
+	            document.getElementById('eventList').appendChild( p_ev[i]);
+	            document.getElementById('eventList').appendChild( document.createElement("hr")  );
+            }
+            document.getElementById('cart').setAttribute('style','display:block');
+			document.getElementById('showId').setAttribute('style','display:block');
+			document.getElementById('logout').setAttribute('style','display:block');
+			document.getElementById('login').setAttribute('style','display:block');
+        }
+      } else { // Mobile
+        var old_mode = mode;
+        mode = 0;
+        if(old_mode != mode) {
+          $('#pc-buy').css('display', 'none');
+          $('#EXPLANATION, #PRECONDITION, #PLACE, #QUESTION').css('margin', '1% 8% 5% 8%');
+          $('#buy-button').css('display', 'block');
+          
+		  //이미지, 상품이름, 가격
+          document.getElementById('product').appendChild(img);
+          document.getElementById('product').appendChild(p);
+          document.getElementById('product').appendChild(h4);
+          document.getElementById('product').appendChild(h5);
+  			document.getElementById('product').appendChild(h3);
+          img.setAttribute( 'style', 'width:60%; height:auto; margin-left:15%;margin-top:5%;border: 0; padding: 0; position:relative; float:none; ' );
+          p.setAttribute( 'style', 'margin: 5% 0% 3% 10%; border: 0; padding: 0% 0% 0% 0%; position:relative; font-weight:700;' );
+			h4.setAttribute( 'style', 'width:80%; margin: 2% 0% 0% 0%; border: 0; padding: 0% 0% 0% 60%;position:relative;float:left; text-decoration: line-through;' );
+ 			h5.setAttribute( 'style', 'width:20%; margin: 2% 0% 0% 0%; border: 0; padding: 0% 0% 0% 0%; position:relative;float:left;' );
+			h3.setAttribute( 'style', 'width:100%; margin: 1% 0% 5% 0%; border: 0; padding: 0% 0% 0% 65%; float:left;color:#518ddd;' );
+          
+			a.setAttribute('href','../myPage/offLineInfo.html?idx=<?php echo $idx;?>');
+			
+			document.getElementById('product').appendChild(a);
+			a.setAttribute('class','btn btn-default');
+			a.setAttribute('style','margin-top:5%; width:95%; position:relative; font-size:12px; text-align:center;');
+			a.innerHTML = "가까운 오프라인매장 보기";
+			
+        //상품선택
+          for(var i = 0; i< 5; i++) 
+          	document.getElementById('bf_select_mob').appendChild(option[i]);
+          
+          var eventList = document.getElementById("eventList");
+          while (eventList.firstChild) {
+          	eventList.removeChild( eventList.firstChild );
+			}
+          for(var i=0; i<rowNum; i++) {
+        	//이벤트 그리기
+  	        if(i==0)	{ p_ev[0] = document.createElement("p"); continue; }
+  	      		li[i].setAttribute('style', 'width:80%;');
+  	          document.getElementById('eventList').appendChild(li[i]);
+  	          document.getElementById('eventList').appendChild( document.createElement("br")  );
+  	          
+	            p_ev[i] = document.createElement("p");
+	            p_ev[i].setAttribute('class','text-warning');
+	            p_ev[i].innerHTML = tzs[i].market_name +"<br/>"+tzs[i].event_name;
+	            document.getElementById('eventList').appendChild( p_ev[i] );
+	            document.getElementById('eventList').appendChild( document.createElement("hr")  );
+          }
+          	document.getElementById('cart').setAttribute('style','display:block');
+			document.getElementById('showId').setAttribute('style','display:none');
+			document.getElementById('logout').setAttribute('style','display:block');
+			document.getElementById('login').setAttribute('style','display:block');
+        }
+      }
+    }
+    
+    function fn_setEvent() {
+		$("#cart_btn_mob").click(function() {
+			 var xhr_putCart = new XMLHttpRequest();
+	        xhr_putCart.open('POST', '../php_db/wishList.php');
+	        xhr_putCart.onreadystatechange = function(){
+	          if(xhr_putCart.readyState === 4 && xhr_putCart.status === 200){
+	        	window.location.replace("../myPage/myCartisNotEmpty.html?idx=<?php echo $idx;?>");
+	          } //end of if
+	        } //end of onreadystatechange
+	        var data = new Object();
+	        data.product_idx = idx;
+	        data.flag = 1;
+	        data.account_idx = account_idx;
+	        xhr_putCart.setRequestHeader("Content-Type", "application/json");
+	        xhr_putCart.send(JSON.stringify(data)); 
+		});
+		$("#cart_btn_pc").click(function() {
+			 var xhr_putCart = new XMLHttpRequest();
+	        xhr_putCart.open('POST', '../php_db/wishList.php');
+	        xhr_putCart.onreadystatechange = function(){
+	          if(xhr_putCart.readyState === 4 && xhr_putCart.status === 200){
+	        	window.location.replace("../myPage/myCartisNotEmpty.html?idx=<?php echo $idx;?>");
+	          } //end of if
+	        } //end of onreadystatechange
+	        var data = new Object();
+	        data.product_idx = idx;
+	        data.flag = 1;
+	        data.account_idx = account_idx;
+	        xhr_putCart.setRequestHeader("Content-Type", "application/json");
+	        xhr_putCart.send(JSON.stringify(data)); 
+		});
+	}
+  </script>
+</body>
+</html>

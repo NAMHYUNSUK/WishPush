@@ -1,0 +1,5 @@
+AuthName "디렉토리 사용자 인증"
+AuthType Basic
+AuthUserFile /usr/local/apache/test/.auth
+Require valid-user
+

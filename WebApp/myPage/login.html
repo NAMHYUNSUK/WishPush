@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- 
+  Name : login.html
+  Description : Page for login 
+  Modification Information
+  1. 2016.02.06. 남현석 최초생성
+  2. 2016.02.12.  ""    링크 추가
+  3. 2016.02.12. 유봉상 sign_in.php 연동
+  4. 2016.02.21. 남현석 반응형기능 완성
+  
+  since
+  version 1.1
+  see
+  -->
+  <title>accounts for LotteMall customer</title>
+  <meta name ="author" Content="Web Application Project Team">
+  <meta name ="keywords" Content="Lotte, mall, shopping, 롯데, 쇼핑">
+  <meta name ="description" Content="GPS기반 쇼핑전용 애플리케이션입니다.">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  <!-- CSS -->
+  
+  <link rel="stylesheet" href="../style/css/bootstrap.min.css" type="text/css">
+
+  <!-- Plugin CSS -->
+  <link rel="stylesheet" href="../style/css/animate.min.css" type="text/css">
+  <link rel="stylesheet" href="../style/css/m.v2.min.css" type="text/css">
+
+  <!-- backward Operator -->
+  <!-- jQuery -->
+  <script src="../style/js/jquery.js"></script>
+  <!-- Bootstrap Core js -->
+  <script src="../style/js/bootstrap.min.js"></script>
+
+  <!-- Plugin js -->
+  <script src="../style/js/jquery.easing.min.js"></script>
+  <script src="../style/js/jquery.fittext.js"></script>
+  <script src="../style/js/wow.min.js"></script>
+  
+  <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+  <script src="https://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+
+</head>
+<body id="body">
+  <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="../index.html">Lotte Mall</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling ('in': open, '': close, 'active': click effect)-->
+        <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-left">
+            <li>
+              <a href="isLogin.php">마이정보</a>
+            </li>
+            <li>
+              <a href="#">프로모션/쿠폰</a>
+            </li>
+            <li>
+              <a href="#">오프라인매장</a>
+            </li>
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+            <li id="cart"><a href="myCartisNotEmpty.html">장바구니</a></li>
+          </ul>
+        </div><!-- end of navbar -->
+      </div><!-- end of container -->
+    </div>
+
+    <!--  blank -->
+    <div id="blank" style="height:50.5px; width:100%"></div>
+
+    <!-- topMenu -->
+    <nav id="topMenu" >
+      <ul id="scroller">
+        
+        <li>
+          <a class="top-menu0 on" href="../index.html" data-cclick="MOBILE_B,SCROLLER,TODAYRECOMM,0">패션의류</a>
+        </li>
+        
+        <li>
+          <a class="top-menu1" href="#" data-cclick="MOBILE_B,SCROLLER,TODAYRECOMM,0">뷰티</a>
+        </li>
+        
+        <li>
+          <a class="top-menu2" href="#" data-cclick="MOBILE_B,SCROLLER,TODAYRECOMM,0">출산/유아동</a>
+        </li>
+    
+        <li>
+          <a class="top-menu3" href="#" data-cclick="MOBILE_B,SCROLLER,TODAYRECOMM,0">식품</a>
+        </li>
+    
+        <li>
+          <a class="top-menu4" href="#" data-cclick="MOBILE_B,SCROLLER,TODAYRECOMM,0">주방/생활용품</a>
+        </li>
+    
+        <li>
+          <a class="top-menu5" href="#" data-cclick="MOBILE_B,SCROLLER,TODAYRECOMM,0">가구/홈데코</a>
+        </li>
+    
+        <li>
+          <a class="top-menu6" href="#" data-cclick="MOBILE_B,SCROLLER,TODAYRECOMM,0">가전/디지털</a>
+        </li>
+    
+        <li>
+          <a class="top-menu7" href="#" data-cclick="MOBILE_B,SCROLLER,TODAYRECOMM,0">스포츠/래저</a>
+        </li>
+    
+        <li>
+          <a class="top-menu8" href="#" data-cclick="MOBILE_B,SCROLLER,TODAYRECOMM,0">도서/문구</a>
+        </li>
+    
+        <li>
+          <a class="top-menu9" href="#" data-cclick="MOBILE_B,SCROLLER,TODAYRECOMM,0">반려/애완용품</a>
+        </li>
+    
+      </ul>
+      <span id="scroller-left" class="scroller-arr-left" data-cclick="MOBILE_B,SCROLLER,LEFT,0"></span>
+      <span id="scroller-right" class="scroller-arr-right" data-cclick="MOBILE_B,SCROLLER,RIGHT,0"></span>
+    </nav>
+
+    <script src="../style/js/iscroll.js" type="text/javascript"></script>
+	<script src="../style/js/topMenuScript.js" type="text/javascript"></script>
+    <!--  blank -->
+    <div id="blank" style="height:110px; width:100%"></div>
+
+    <!-- Start Main -->
+    <div id="joinUs" style="">
+      <h1 style="login-joinbox-title">신규회원</h1> 
+      <div class="login-joinbox-content">
+        <strong style="color:#0073e9">롯데회원</strong>
+        이 되시면 
+        <strong style="color:#0073e9">고객 맞춤형 서비스</strong>
+        가 여러분을 기다립니다!
+      </div>
+      <button id="btn_join" type="reset" class="btn btn-default" style="float:right; margin-top:5%;">회원가입</button>
+    </div>
+    
+    <form id="login" name="login" action="../php_db/sign_in.php" method="POST" class="form-horizontal" role="userInfo" method="post" accept-charset="utf-8" style="">
+      <h1 class="login-title">로그인</h1>
+      <fieldset>
+        <legend>로그인</legend>
+        <div class="form-group">
+          <label for="inputId" class="col-lg-2 control-label">ID</label>
+          <div class="col-lg-10">
+            <input type="text" class="form-control" name="usr_id" id="usr_id" placeholder="Id">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputPassword" class="col-lg-2 control-label">Password</label>
+          <div class="col-lg-10">
+            <input type="password" name="usr_pw" class="form-control" id="usr_pw" placeholder="Password" >
+            <div class="checkbox">
+              <label>
+                <input type="checkbox"> 자동로그인
+              </label>
+            </div>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <div class="col-lg-10 col-lg-offset-2" style='position:relative;'>
+          <button id="btn_login" type="submit" class="btn btn-primary" style="margin-left:3%;">로그인</button>
+            <button id="btn_join_mob" type="reset" class="btn btn-default">회원가입</button>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+    
+ 	<script>
+      $(document).ready(init);
+    
+      function init() {
+          set_event();
+          reloadDisplay(); 
+        window.onresize = function() { 
+          reloadDisplay(); 
+        };
+      }
+      
+      var mode = null; // 1이면 PC 상태, 0이면 MOBILE 상태
+      
+      function setResizeMode() {
+        if ($(window).width() >= 768) {
+          mode = 0;
+        }
+        else {
+          mode = 1;
+        }
+      }
+
+      function reloadDisplay() {
+        setResizeMode();
+
+        if ($(window).width() >= 768) { // PC
+        
+          var old_mode = mode;
+          mode = 1;
+          
+          if(old_mode != mode) {
+              $('#btn_join_mob').css('display', 'none');
+              $('#joinUs').css('display', 'block');
+
+              $('#joinUs').css('position', 'relative');
+              $('#joinUs').css('float', 'left');
+              $('#joinUs').css('width', '35%');
+              $('#joinUs').css('margin-right', '5%');
+
+              var joinLogin = document.createElement("div");
+              joinLogin.setAttribute('id', 'joinLogin');
+              $('#login').css('width', '35%');
+              $('#login').css('position', 'relative');
+              $('#login').css('float', 'left');
+              $('#btn_login').css('float', 'right');
+
+              joinLogin.appendChild(document.getElementById('joinUs'));
+              joinLogin.appendChild(document.getElementById('login'));
+
+              joinLogin.setAttribute('style','width:80%; margin-left:auto;margin-right:auto;display:block;');
+
+              document.getElementById("body").appendChild(joinLogin);
+          }
+        } else { // Mobile
+          var old_mode = mode;
+          mode = 0;
+          if(old_mode != mode) {
+        	  var temp;
+        	  var joinLogin = document.getElementById("joinLogin");
+        	if(joinLogin != null) {
+        		while ( joinLogin.firstChild ) {
+        			temp=joinLogin.firstChild;
+        			document.getElementById("body").appendChild(  temp);
+    			}
+        		$('#joinLogin').css('display', 'none');
+        	}
+            
+            $('#joinUs').css('display', 'none');
+            $('#btn_join_mob').css('position', 'relative');
+            $('#btn_login').css('float', 'right');
+            $('#btn_join_mob').css('float', 'right');
+            $('#btn_join_mob').css('display', 'block');
+            
+            $('#btn_login').css('position', 'relative');
+            
+            $('#login').css('position', 'relative');
+            $('#login').css('float', 'none');
+            $('#login').css('width', '50%');
+            $('#login').css('margin-left', 'auto');
+            $('#login').css('margin-right', 'auto');
+            $('#login').css('display', 'block');
+          }
+        }
+      }
+
+    function set_event() {
+      //tab controll
+      $('.detail-tab a').click(function(e){
+          e.preventDefault();
+          $('.detail-tab a').removeClass('selected')
+          $('#EXPLANATION, #PRECONDITION, #PLACE, #QUESTION').hide();
+
+          $(this).addClass('selected');
+          $($(this).attr('href')).show();
+
+          // 상품문의 목록 호출
+          if($(this).attr('href') == '#QUESTION'){
+          }
+      });
+      $("#btn_join_mob").click(function() {
+            var  signUpURL = "./signUp.html"
+            document.location.href = signUpURL;
+          }
+      );
+      $("#btn_join").click(function() {
+            var  signUpURL = "./signUp.html"
+            document.location.href = signUpURL;
+          }
+      );
+    }    
+    </script>
+</body>
+</html>

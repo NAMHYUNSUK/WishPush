@@ -1,0 +1,319 @@
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- 
+  Name : index.html
+  Description : Main page
+  Modification Information
+  1. 2016.02.05. 남현석 최초생성
+  2. 2016.02.12.  ""    프레임 구축
+  3. 2016.02.15.  ""    상품목록 추가 
+  4. 2016.02.21.  ""    반응형 완
+  
+  since
+  version 1.1
+  see
+  -->
+  <title>Welcome to LotteMall</title>
+  <meta name ="author" Content="Web Application Project Team">
+  <meta name ="keywords" Content="Lotte, mall, shopping, 롯데, 쇼핑">
+  <meta name ="description" Content="GPS기반 쇼핑전용 애플리케이션입니다.">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style/css/bootstrap.min.css" type="text/css">
+
+  <!-- Plugin CSS -->
+  <link rel="stylesheet" href="style/css/animate.min.css" type="text/css">
+  <link rel="stylesheet" href="style/css/m.v2.min.css" type="text/css">
+
+  <!-- backward Operator -->
+  <!-- jQuery -->
+  <script src="style/js/jquery.js"></script>
+  <!-- Bootstrap Core js -->
+  <script src="style/js/bootstrap.min.js"></script>
+
+  <!-- Plugin js -->
+  <script src="style/js/jquery.easing.min.js"></script>
+  <script src="style/js/jquery.fittext.js"></script>
+  <script src="style/js/wow.min.js"></script>
+</head>
+
+<body>
+	<!-- 탑바-->
+  <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container-fluid">
+        <!-- Brand  -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="index.html">Lotte Mall</a>
+        </div>
+
+        <!-- 탑 바('in': open, '': close, 'active': click effect)-->
+        <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-left">
+            <li>
+              <a href="./myPage/isLogin.php">마이정보</a>
+            </li>
+            <li>
+              <a href="#">프로모션/쿠폰</a>
+            </li>
+            <li>
+              <a href="#">오프라인매장</a>
+            </li>
+          </ul>
+          
+          <!-- 우측 메뉴 -->
+          <ul class="nav navbar-nav navbar-right">
+            <li><a id="cart" href="./myPage/myCartisNotEmpty.html">장바구니</a></li>
+            <li ><a id="showId" href="/myPage/isLogin.php">          
+            <?php 
+			session_start();
+			
+			$is_logged = $_SESSION['is_logged'];
+			$usr_id = $_SESSION['usr_id'];
+	
+			if ($is_logged == 'YES')
+			{
+				echo $usr_id." 님 환영합니다."; 
+			}
+			
+ 			?></a></li>
+ 			
+ 			<li><a id="logout" href="/php_db/logout.php">          
+            <?php 			
+
+			if ($is_logged == 'YES')
+			{
+				echo "로그아웃"; 
+			}
+		
+			mysql_close($connect);
+ 			?></a></li>
+ 			
+ 			<li><a id="login" href="/myPage/login.html">          
+            <?php
+             
+			if ($is_logged != 'YES')
+			{
+				echo "로그인"; 
+			}
+ 			?></a></li>
+          </ul>
+
+        </div><!-- end of navbar -->
+      </div><!-- end of container -->
+    </div>
+
+    <!--  blank -->
+    <div id="blank" style="height:50.5px; width:100%"></div>
+
+    <!-- topMenu -->
+    <nav id="topMenu" >
+      <ul id="scroller">
+        <li>
+          <a class="top-menu0 on" href="#" data-cclick="MOBILE_B,SCROLLER,TODAYRECOMM,0">패션의류</a>
+        </li>
+        <li>
+          <a class="top-menu1" href="#" data-cclick="MOBILE_B,SCROLLER,TODAYRECOMM,0">뷰티</a>
+        </li>
+        <li>
+          <a class="top-menu2" href="#" data-cclick="MOBILE_B,SCROLLER,TODAYRECOMM,0">출산/유아동</a>
+        </li>
+        <li>
+          <a class="top-menu3" href="#" data-cclick="MOBILE_B,SCROLLER,TODAYRECOMM,0">식품</a>
+        </li>
+        <li>
+          <a class="top-menu4" href="#" data-cclick="MOBILE_B,SCROLLER,TODAYRECOMM,0">주방/생활용품</a>
+        </li>
+        <li>
+          <a class="top-menu5" href="#" data-cclick="MOBILE_B,SCROLLER,TODAYRECOMM,0">가구/홈데코</a>
+        </li>
+        <li>
+          <a class="top-menu6" href="#" data-cclick="MOBILE_B,SCROLLER,TODAYRECOMM,0">가전/디지털</a>
+        </li>
+        <li>
+          <a class="top-menu7" href="#" data-cclick="MOBILE_B,SCROLLER,TODAYRECOMM,0">스포츠/래저</a>
+        </li>
+        <li>
+          <a class="top-menu8" href="#" data-cclick="MOBILE_B,SCROLLER,TODAYRECOMM,0">도서/문구</a>
+        </li>
+        <li>
+          <a class="top-menu9" href="#" data-cclick="MOBILE_B,SCROLLER,TODAYRECOMM,0">반려/애완용품</a>
+        </li>
+      </ul>
+	<!-- 왼오른쪽 버튼 -->
+      <span id="scroller-left" class="scroller-arr-left" data-cclick="MOBILE_B,SCROLLER,LEFT,0"></span>
+      <span id="scroller-right" class="scroller-arr-right" data-cclick="MOBILE_B,SCROLLER,RIGHT,0"></span>
+    </nav>
+
+    <script src="style/js/iscroll.js" type="text/javascript"></script>
+
+	<!-- 상품 리스트  -->
+    <div id="itemList" class="list-group">
+    </div>
+
+    <script src="style/js/topMenuScript.js" type="text/javascript"></script>
+
+    <script>
+      var itemNum;
+      var item = [];
+      var tzs = [];
+      var dv = [];
+      $(document).ready(init);
+      function init() {
+    	  //DB와 Ajax 통신
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'https://www.lotteshop.tk/php_db/mainPage.php');
+        xhr.onreadystatechange = function(){
+        	//성공시
+            if(xhr.readyState === 4 && xhr.status === 200){
+                var _tzs = xhr.responseText;
+                tzs = JSON.parse(_tzs);
+                var _str = '';
+                itemNum = tzs.length;
+                item;
+                for(var i = 0; i< itemNum; i++){
+                    item[i] = document.createElement("a");
+                    item[i].setAttribute('href','product/detail_product.html?idx='+tzs[i].product_idx+"&name="+tzs[i].product_name+"&price="+tzs[i].product_price+"&img_name="+tzs[i].img_name+"&rate="+tzs[i].rate);
+                    item[i].setAttribute('class','list-group-item overlink');
+
+                    item[i].setAttribute('id','item['+i+']');
+                    var h4 = document.createElement("h4");
+                    h4.setAttribute('class','list-group-item-heading');
+                    h4.setAttribute('style','position:relative; float:left; text-decoration: line-through;');
+                    h4.innerHTML = tzs[i].product_price+"  "; //상품가격
+                    
+                    var h5 = document.createElement("h5");
+                    h5.setAttribute('class','list-group-item-heading');
+                    h5.setAttribute('style','position:relative; float:left;');
+                    h5.innerHTML = "  ("+tzs[i].rate+"% 할인)"; //상품가격
+                    
+                    var h3 = document.createElement("h3");
+                    h3.setAttribute('class','list-group-item-heading');
+                    h3.setAttribute('style','position:relative; float:right; color:#518ddd;margin-bottom:5%;');
+                    h3.innerHTML = Math.round(Math.round(tzs[i].product_price)*(100-Math.round(tzs[i].rate))/100 /100)*100  + ' 원';  ; //상품가격
+
+                    var p = document.createElement("p"); // 이름 
+                    p.setAttribute('class','list-group-item-text');
+                    p.setAttribute('style','height: 30px; position:relative; margin-top: 2%; margin-bottom: 6%;');
+                    p.innerHTML = tzs[i].product_name ;
+
+                    var img = document.createElement("img"); //이미지 
+                    img.setAttribute( 'src', 'img/'+ tzs[i].img_name );
+                    img.setAttribute( 'width', '186' );
+                    img.setAttribute( 'height', '186' );
+                    
+                    
+                    item[i].appendChild(img);
+                    item[i].appendChild( document.createElement("br") );
+                    item[i].appendChild(p);
+                    item[i].appendChild( document.createElement("br") );
+                    item[i].appendChild(h4);
+                    item[i].appendChild(h5);
+                    item[i].appendChild(h3);
+                    item[i].appendChild( document.createElement("br") );
+                    img.setAttribute( 'style', 'margin-left:15%; border: 0; padding: 0; ' );
+                }
+                reloadDisplay();
+            }
+
+        }
+        xhr.send(); 
+        window.onresize = function() { 
+            reloadDisplay(); 
+        };
+      }
+      
+   // 리사이즈가 변화에 따라 한 번만 실행되도록 mode 값 활용
+      var mode = null; // 1이면 PC 상태, 0이면 MOBILE 상태
+      
+      function setResizeMode() {
+        if ($(window).width() >= 768) {
+          mode = 0;
+        }
+        else {
+          mode = 1;
+        }
+      }
+
+      function reloadDisplay() {  //반응형 웹기능
+        setResizeMode();
+
+        if ($(window).width() >= 768) { // PC
+          var old_mode = mode;
+          mode = 1;
+          
+          if(old_mode != mode) {
+				var itemList = document.getElementById("itemList");
+				while (itemList.firstChild) {
+					itemList.removeChild( itemList.firstChild );
+				}
+				dv[0] = document.createElement("div");
+				dv[1] = document.createElement("div");
+				dv[2] = document.createElement("div");
+				
+				document.getElementById('itemList').appendChild(dv[0]);
+				document.getElementById('itemList').appendChild(dv[1]);
+				document.getElementById('itemList').appendChild(dv[2]);
+				
+				dv[0].setAttribute('style','width:33%; position: relative; float: left');
+				dv[1].setAttribute('style','width:33%;position: relative; float: left');
+				dv[2].setAttribute('style','width:33%;position: relative; float: left');
+				
+				for(var i=0; i<itemNum; i++) {
+					dv[i%3].appendChild(item[i]);
+					item[i].setAttribute('style','height: 45%; padding-top:5%; padding-bottom:5%;');
+					dv[i%3].appendChild( document.createElement("br")  );
+					
+				}
+				
+				document.getElementById('cart').setAttribute('style','display:block');
+				document.getElementById('showId').setAttribute('style','display:block');
+				document.getElementById('logout').setAttribute('style','display:block');
+				document.getElementById('login').setAttribute('style','display:block');
+				
+				
+
+          }
+          
+        } else { // Mobile
+          var old_mode = mode;
+          mode = 0;
+          if(old_mode != mode) {
+  			var itemList = document.getElementById("itemList");
+			while (itemList.firstChild) {
+				itemList.removeChild( itemList.firstChild );
+			}
+			for(var i=0; i<itemNum; i++) {
+	            document.getElementById('itemList').appendChild(item[i]);
+	            item[i].setAttribute('style','height: 50%; padding-top:8%; padding-bottom:5%;');
+	            document.getElementById('itemList').appendChild( document.createElement("br")  );
+				
+			}
+			
+			document.getElementById('cart').setAttribute('style','display:block');
+			document.getElementById('showId').setAttribute('style','display:none');
+			document.getElementById('logout').setAttribute('style','display:block');
+			document.getElementById('login').setAttribute('style','display:block');
+
+          }
+        
+        }
+
+      }
+
+    </script>
+
+</body>
+</html>

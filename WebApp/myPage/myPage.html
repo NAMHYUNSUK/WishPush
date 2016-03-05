@@ -1,0 +1,334 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- 
+  Name : myPage.html
+  Description : 내 정보 보기
+  Modification Information
+  1. 2016.02.10. 남현석 최초생성
+  2. 2016.02.12.  "" 프레임 완성
+  3. 2016.02.18.  "" 포인트 기능추가
+  4. 2016.02.21.  "" 반응형 완
+  5.
+  
+  since
+  version 1.1
+  see
+  -->
+  <title>accounts for LotteMall customer</title>
+  <meta name ="author" Content="Web Application Project Team">
+  <meta name ="keywords" Content="Lotte, mall, shopping, 롯데, 쇼핑">
+  <meta name ="description" Content="GPS기반 쇼핑전용 애플리케이션입니다.">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="../style/css/bootstrap.min.css" type="text/css">
+
+  <!-- Plugin CSS -->
+  <link rel="stylesheet" href="../style/css/animate.min.css" type="text/css">
+  <link rel="stylesheet" href="../style/css/m.v2.min.css" type="text/css">
+
+  <!-- backward Operator -->
+  <!-- jQuery -->
+  <script src="../style/js/jquery.js"></script>
+  <!-- Bootstrap Core js -->
+  <script src="../style/js/bootstrap.min.js"></script>
+
+  <!-- Plugin js -->
+  <script src="../style/js/jquery.easing.min.js"></script>
+  <script src="../style/js/jquery.fittext.js"></script>
+  <script src="../style/js/wow.min.js"></script>
+</head>
+<body>
+  <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="../index.html">Lotte Mall</a>
+        </div>
+<?php 
+
+require_once ($_SERVER['DOCUMENT_ROOT']."/preset.php");
+
+session_start();
+//$post = $_POST['flag'];
+$data = json_decode(file_get_contents('php://input'),true);
+$flag = $data['flag'];
+
+	$is_logged = $_SESSION['is_logged'];
+	$usr_id = $_SESSION['usr_id'];
+	$account_idx = $_SESSION['account_idx'];
+	
+	$query = "SELECT point FROM account WHERE id ='{$usr_id}'";
+	$result = mysql_query($query);
+	$res = mysql_fetch_row($result); //
+	
+	$_SESSION['point'] = $res[0];
+	
+	$point = $_SESSION['point'];
+	
+	$message = $usr_id . ' 님, 로그인 했습니다.<br />';
+
+	//echo "<script>account_idx='$account_idx'; point='$point';</script>";
+?>
+        <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-left">
+            <li>
+              <a href="isLogin.php">마이정보</a>
+            </li>
+            <li>
+              <a href="#">프로모션/쿠폰</a>
+            </li>
+            <li>
+              <a href="#">오프라인매장</a>
+            </li>
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+            <li id="cart"><a href="./myCartisNotEmpty.html">장바구니</a></li>
+            <li ><a id="showId" href="isLogin.php">          
+            <?php 
+			session_start();
+			
+			$is_logged = $_SESSION['is_logged'];
+			$usr_id = $_SESSION['usr_id'];
+	
+			if ($is_logged == 'YES')
+			{
+				echo $usr_id." 님 환영합니다."; 
+			}
+ 			?></a></li>
+ 			<li><a id="logout" href="../php_db/logout.php">          
+            <?php 			
+			if ($is_logged == 'YES')
+			{
+				echo "로그아웃"; 
+			}
+		
+			mysql_close($connect);
+ 			?></a></li>
+ 			<li><a id="login" href="login.html">          
+            <?php
+			if ($is_logged != 'YES')
+			{
+				echo "로그인"; 
+			}
+ 			?></a></li>
+          </ul>
+        </div><!-- end of navbar -->
+      </div><!-- end of container -->
+    </div>
+
+    <!--  blank -->
+    <div id="blank" style="height:50.5px; width:100%"></div>
+
+    <!-- topMenu -->
+    <nav id="topMenu" >
+      <ul id="scroller">
+        <li>
+          <a class="top-menu0 on" href="./myPage.html" data-cclick="MOBILE_B,SCROLLER,TODAYRECOMM,0">포인트/쿠폰</a>
+        </li>
+        <li>
+          <a class="top-menu1" href="isMyAccount.php" data-cclick="MOBILE_B,SCROLLER,TODAYRECOMM,0">개인정보확인/수정</a>
+        </li>
+        <li>
+          <a class="top-menu2" href="#" data-cclick="MOBILE_B,SCROLLER,TODAYRECOMM,0">주문목록</a>
+        </li>
+        <li>
+          <a class="top-menu3" href="#" data-cclick="MOBILE_B,SCROLLER,TODAYRECOMM,0">취소반품내역</a>
+        </li>
+        <li>
+          <a class="top-menu4" href="#" data-cclick="MOBILE_B,SCROLLER,TODAYRECOMM,0">상품평</a>
+        </li>
+        <li>
+          <a class="top-menu5" href="#" data-cclick="MOBILE_B,SCROLLER,TODAYRECOMM,0">FAQ보기</a>
+        </li>
+        <li>
+          <a class="top-menu6" href="#" data-cclick="MOBILE_B,SCROLLER,TODAYRECOMM,0">고객의소리</a>
+        </li>
+        <li>
+          <a class="top-menu7" href="#" data-cclick="MOBILE_B,SCROLLER,TODAYRECOMM,0">문의내역 확인</a>
+        </li>
+        <li>
+          <a class="top-menu8" href="#" data-cclick="MOBILE_B,SCROLLER,TODAYRECOMM,0">전화문의</a>
+        </li>
+      </ul>
+      <span id="scroller-left" class="scroller-arr-left" data-cclick="MOBILE_B,SCROLLER,LEFT,0"></span>
+      <span id="scroller-right" class="scroller-arr-right" data-cclick="MOBILE_B,SCROLLER,RIGHT,0"></span>
+    </nav>
+    <script src="../style/js/iscroll.js" type="text/javascript"></script>
+    <script src="../style/js/topMenuScript.js" type="text/javascript"></script>
+
+    <!--  blank -->
+    <div id="blank" style="height:50.5px; width:100%"></div>
+
+    <div id="point_list" class="list-group" style="width:80%; margin-left: auto; margin-right:auto">
+      <a href="#" class="list-group-item active">
+      </a>
+      <a href="#" class="list-group-item" style="font-weight: bold;">사용가능 포인트
+      </a>
+      <p id="point" class="list-group-item">
+      <!-- 포인트 0 P  --> <?php echo $point. " 점";?>
+      </p>
+    </div>
+
+    <div id="coupon_list" class="list-group" style="width:80%; margin-left: auto; margin-right:auto">
+      <a href="#" class="list-group-item active">
+      </a>
+      <a href="#" class="list-group-item" style="font-weight: bold;">사용가능 쿠폰
+      </a>
+      <a href="#" class="list-group-item">
+        배송비 1회 무료 쿠폰
+      </a>
+      <a href="#" class="list-group-item">
+        2만원 이상 상품 10%할인 쿠폰
+      </a>
+    </div>
+
+	<!--  쿠폰 등록 -->
+    <form id="get_coupon" class="form-horizontal" style="width:80%; margin-left: auto; margin-right:auto">
+      <fieldset>
+        <div class="form-group">
+          <label for="inputEmail" class="col-lg-2 control-label">교환권 코드 등록</label>
+          <div class="col-lg-10">
+            <input type="text" class="form-control" id="inputEmail" placeholder="'-' 없이 20자리를 입력하세요.">
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <div class="col-lg-10 col-lg-offset-2" style="position:relative; float:right;">
+            <button id="cancel" type="reset" class="btn btn-default">취소</button>
+            <button id="regis" type="submit" class="btn btn-primary">등록</button>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+<script>
+$(document).ready(sendWhichPlatform);
+
+function sendWhichPlatform(){
+          var xhr = new XMLHttpRequest();
+     	  xhr.open('GET', '../php_db/latlng_info.php');
+     	  xhr.onreadystatechange = function(){
+     	     if(xhr.readyState === 4 && xhr.status === 200){
+     	        var _tzs = xhr.responseText;   
+     	        isMobile(_tzs);
+     	     }
+         var data = new Object();
+         data.account_idx = account_idx;
+         xhr.setRequestHeader("Content-Type", "application/json");
+         xhr.send(JSON.stringify(data)); 
+        }
+}
+function isMobile(_tzs) {
+    var filter = "win16|win32|win64|mac|macintel";
+    if( navigator.platform  ){
+      if( filter.indexOf(navigator.platform.toLowerCase())<0 ){
+        sendJSON(_tzs);
+      }
+    }
+  }
+
+function sendJSON(latlng_info){
+	
+	 var xhr = new XMLHttpRequest();
+	  xhr.open('POST', '../myPage/sendlatlng.php');
+	  xhr.onreadystatechange = function(){
+	     if(xhr.readyState === 4 && xhr.status === 200){
+	        var _tzs = xhr.responseText;   
+	     }
+    var data = new Object();
+    data.latlng_info = latlng_info;
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.send(JSON.stringify(data)); 
+   }
+}
+</script>
+<script>
+      $(document).ready(init);
+    
+      function init() {
+          set_event();
+          reloadDisplay(); 
+        window.onresize = function() { 
+          reloadDisplay(); 
+        };
+        
+      }
+      var mode = null; // 1이면 PC 상태, 0이면 MOBILE 상태
+      
+      function setResizeMode() {
+        if ($(window).width() >= 768) {
+          mode = 0;
+        }
+        else {
+          mode = 1;
+        }
+      }
+
+      function reloadDisplay() {
+        setResizeMode();
+
+        if ($(window).width() >= 768) { // PC
+        
+          var old_mode = mode;
+          mode = 1;
+          
+          if(old_mode != mode) {
+              $('#coupon_list').css('width', '50%');
+              $('#point_list').css('width', '50%');
+              $('#get_coupon').css('width', '50%');
+
+
+              document.getElementById('cart').setAttribute('style','display:block');
+				document.getElementById('showId').setAttribute('style','display:block');
+				document.getElementById('logout').setAttribute('style','display:block');
+				document.getElementById('login').setAttribute('style','display:block');
+          }
+          
+        } else { // Mobile
+          
+          var old_mode = mode;
+          mode = 0;
+          if(old_mode != mode) {
+              $('#coupon_list').css('width', '70%');
+              $('#point_list').css('width', '70%');
+              $('#get_coupon').css('width', '70%');
+
+              document.getElementById('cart').setAttribute('style','display:block');
+  			document.getElementById('showId').setAttribute('style','display:none');
+  			document.getElementById('logout').setAttribute('style','display:block');
+  			document.getElementById('login').setAttribute('style','display:block');
+          }
+        
+        }
+
+      }
+
+    function set_event() {
+      $("#cancel").click(function() {
+            var  mainURL = "../index.html"
+            document.location.href = mainURL;
+          }
+      );
+      $("#regis").click(function() {
+            alert("보완중입니다.");
+          }
+      );
+
+    }    
+    </script>
+<?php 
+mysql_close($connect);
+?>
+</body>
+</html>

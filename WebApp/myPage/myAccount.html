@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- 
+  Name : myAccount.html
+  Description : 회원정보 변경
+  Modification Information
+  1. 2016.02.04. 남현석 최초생성
+  2. 2016.02.12. 남현석 프레임 완성
+
+  since
+  version 1.1
+  see
+  -->
+  <title>accounts for LotteMall customer</title>
+  <meta name ="author" Content="Web Application Project Team">
+  <meta name ="keywords" Content="Lotte, mall, shopping, 롯데, 쇼핑">
+  <meta name ="description" Content="GPS기반 쇼핑전용 애플리케이션입니다.">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="../style/css/bootstrap.min.css" type="text/css">
+
+  <!-- Plugin CSS -->
+  <link rel="stylesheet" href="../style/css/animate.min.css" type="text/css">
+  <link rel="stylesheet" href="../style/css/m.v2.min.css" type="text/css">
+
+  <!-- backward Operator -->
+  <!-- jQuery -->
+  <script src="../style/js/jquery.js"></script>
+  <!-- Bootstrap Core js -->
+  <script src="../style/js/bootstrap.min.js"></script>
+
+  <!-- Plugin js -->
+  <script src="../style/js/jquery.easing.min.js"></script>
+  <script src="../style/js/jquery.fittext.js"></script>
+  <script src="../style/js/wow.min.js"></script>
+</head>
+<body>
+  <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="../index.html">Lotte Mall</a>
+        </div>
+
+        <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-left">
+            <li>
+              <a href="isLogin.php">마이정보</a>
+            </li>
+            <li>
+              <a href="#">프로모션/쿠폰</a>
+            </li>
+            <li>
+              <a href="#">오프라인매장</a>
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+            <li id="cart"><a href="#">장바구니</a></li>
+            <li ><a id="showId" href="isLogin.php">          
+            <?php 
+			session_start();
+			
+			$is_logged = $_SESSION['is_logged'];
+			$usr_id = $_SESSION['usr_id'];
+	
+			if ($is_logged == 'YES')
+			{
+				echo $usr_id." 님 환영합니다."; 
+			}
+ 			?></a></li>
+ 			<li><a id="logout" href="../php_db/logout.php">          
+            <?php 			
+			if ($is_logged == 'YES')
+			{
+				echo "로그아웃"; 
+			}
+		
+			mysql_close($connect);
+ 			?></a></li>
+ 			<li><a id="login" href="login.html">          
+            <?php
+			if ($is_logged != 'YES')
+			{
+				echo "로그인"; 
+			}
+ 			?></a></li>
+          </ul>
+        </div><!-- end of navbar -->
+      </div><!-- end of container -->
+    </div>
+
+    <!--  blank -->
+    <div id="blank" style="height:50.5px; width:100%"></div>
+
+    <!-- topMenu -->
+    <nav id="topMenu" >
+      <ul id="scroller">
+        <li>
+          <a class="top-menu0" href="./myPage.html" data-cclick="MOBILE_B,SCROLLER,TODAYRECOMM,0">포인트/쿠폰</a>
+        </li>
+        <li>
+          <a class="top-menu1 on" href="myAccount.html" data-cclick="MOBILE_B,SCROLLER,TODAYRECOMM,0">개인정보확인/수정</a>
+        </li>
+        <li>
+          <a class="top-menu2" href="#" data-cclick="MOBILE_B,SCROLLER,TODAYRECOMM,0">주문목록</a>
+        </li>
+        <li>
+          <a class="top-menu3" href="#" data-cclick="MOBILE_B,SCROLLER,TODAYRECOMM,0">취소반품내역</a>
+        </li>
+        <li>
+          <a class="top-menu4" href="#" data-cclick="MOBILE_B,SCROLLER,TODAYRECOMM,0">상품평</a>
+        </li>
+        <li>
+          <a class="top-menu5" href="#" data-cclick="MOBILE_B,SCROLLER,TODAYRECOMM,0">FAQ보기</a>
+        </li>
+        <li>
+          <a class="top-menu6" href="#" data-cclick="MOBILE_B,SCROLLER,TODAYRECOMM,0">고객의소리</a>
+        </li>
+        <li>
+          <a class="top-menu7" href="#" data-cclick="MOBILE_B,SCROLLER,TODAYRECOMM,0">문의내역 확인</a>
+        </li>
+        <li>
+          <a class="top-menu8" href="#" data-cclick="MOBILE_B,SCROLLER,TODAYRECOMM,0">전화문의</a>
+        </li>
+      </ul>
+      <span id="scroller-left" class="scroller-arr-left" data-cclick="MOBILE_B,SCROLLER,LEFT,0"></span>
+      <span id="scroller-right" class="scroller-arr-right" data-cclick="MOBILE_B,SCROLLER,RIGHT,0"></span>
+    </nav>
+
+    <script src="../style/js/iscroll.js" type="text/javascript"></script>
+    <script src="../style/js/topMenuScript.js" type="text/javascript"></script>
+   
+    <!--  blank -->
+    <div id="blank" style="height:50.5px; width:100%"></div>
+
+	<!-- 변경 폼 -->
+    <form id="acc_form" name="modify" action="../php_db/account_modify.php" method="POST" class="form-horizontal" style="width:80%; margin-left: auto; margin-right:auto">
+      <fieldset>
+        <div class="form-group">
+          <label for="inputEmail" class="col-lg-2 control-label">비밀번호 변경</label>
+          <div class="col-lg-10">
+            <input type="password" class="form-control" name="usr_pw" id="usr_pw" placeholder="새로운 비밀번호">
+            <input type="password" class="form-control" name="usr_pw2" id="usr_pw2" placeholder="재입력">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="inputEmail" class="col-lg-2 control-label">휴대폰 번호 입력</label>
+          <div class="col-lg-10">
+            <input type="text" class="form-control" name="usr_pnum" id="usr_pnum" placeholder="새로운 휴대폰 번호 입력">
+          </div>
+        </div>
+        
+        <div class="form-group" >
+          <div class="col-lg-10 col-lg-offset-2" style="position:relative; float:right;">
+            <button type="reset" class="btn btn-default">취소</button>
+            <button type="submit" class="btn btn-primary" >변경</button>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+<script>
+      $(document).ready(init);
+    
+      function init() {
+          reloadDisplay(); 
+        window.onresize = function() { 
+          reloadDisplay(); 
+        };
+        
+      }
+      
+      var mode = null; // 1이면 PC 상태, 0이면 MOBILE 상태
+      
+      function setResizeMode() {
+        if ($(window).width() >= 768) {
+          mode = 0;
+        }
+        else {
+          mode = 1;
+        }
+      }
+
+      function reloadDisplay() {
+        setResizeMode();
+
+        if ($(window).width() >= 768) { // PC
+        
+          var old_mode = mode;
+          mode = 1;
+          
+          if(old_mode != mode) {
+              $('#acc_form').css('width', '50%');
+
+              document.getElementById('cart').setAttribute('style','display:block');
+				document.getElementById('showId').setAttribute('style','display:block');
+				document.getElementById('logout').setAttribute('style','display:block');
+				document.getElementById('login').setAttribute('style','display:block');
+
+          }
+          
+        } else { // Mobile
+          
+          var old_mode = mode;
+          mode = 0;
+          if(old_mode != mode) {
+              $('#acc_form').css('width', '70%');
+          
+              document.getElementById('cart').setAttribute('style','display:block');
+    			document.getElementById('showId').setAttribute('style','display:none');
+    			document.getElementById('logout').setAttribute('style','display:block');
+    			document.getElementById('login').setAttribute('style','display:block');
+          }
+        }
+      }
+    </script>
+</body>
+</html>
